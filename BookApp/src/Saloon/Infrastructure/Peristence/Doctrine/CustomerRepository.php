@@ -14,7 +14,7 @@ class CustomerRepository extends ServiceEntityRepository implements CustomerRepo
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Workplace::class);
+        parent::__construct($registry, Customer::class);
     }
 
 
@@ -23,9 +23,10 @@ class CustomerRepository extends ServiceEntityRepository implements CustomerRepo
         // TODO: Implement load() method.
     }
 
-    public function save(Customer $workplace)
+    public function save(Customer $customer)
     {
-        // TODO: Implement save() method.
+        $this->_em->persist($customer);
+        $this->_em->flush($customer);
     }
 
     public function get(string $id): ?Customer

@@ -14,12 +14,13 @@ class AppointmentController extends AbstractController
 {
     public function createApointment(Request $request){
 
+
         $params = json_decode($request->getContent(), true);
 
 
         $id = Uuid::uuid4();
 
-        $this->dispatchMessage(new MakeAppointmentCommand($id,$params['customer'],$params['workplace'],$params['date']));
+        $this->dispatchMessage(new MakeAppointmentCommand($id,$params['customerEmail'],$params['workplace'],$params['date']));
 
 
         return new JsonResponse(['ID'=>$id],201);

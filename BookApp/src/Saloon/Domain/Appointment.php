@@ -10,9 +10,9 @@ class Appointment
 
     private ?string $hairdresser;
     /**
-     * @var string
+     * @var \DateTime
      */
-    private string $dateTime;
+    private \DateTime $dateTime;
     /**
      * @var Customer
      */
@@ -24,10 +24,10 @@ class Appointment
      * @param string $id
      * @param Workplace $workplace
      * @param Customer $customer
-     * @param string $dateTime
+     * @param \DateTime $dateTime
      * @param Hairdresser $hairdresser
      */
-    public function __construct(string $id, Workplace $workplace, Customer $customer,  string $dateTime,  ?Hairdresser $hairdresser)
+    public function __construct(string $id, Workplace $workplace, Customer $customer,  \DateTime $dateTime,  ?Hairdresser $hairdresser)
     {
         $this->id = $id;
         $this->workplace = $workplace;
@@ -63,7 +63,7 @@ class Appointment
     /**
      * @return string
      */
-    public function getDateTime(): string
+    public function getDateTime(): \DateTime
     {
         return $this->dateTime;
     }

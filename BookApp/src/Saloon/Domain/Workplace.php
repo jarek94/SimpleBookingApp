@@ -40,6 +40,10 @@ class Workplace
         return $this->availability;
     }
 
+    public function __toString(): string
+    {
+      return $this->getId();
+    }
 
 
 }

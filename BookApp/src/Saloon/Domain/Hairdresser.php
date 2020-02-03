@@ -69,6 +69,11 @@ class Hairdresser
         return $this->defaultWorkplace;
     }
 
+    public function __toString(): string
+    {
+        return $this->getId();
+    }
+
 
 
 }

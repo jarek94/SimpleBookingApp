@@ -13,11 +13,11 @@ class Customer
     /**
      * @var string
      */
-    private string $firstName;
+    private ?string $firstName;
     /**
      * @var string
      */
-    private string $lastName;
+    private ?string $lastName;
     /**
      * @var string
      */
@@ -30,7 +30,7 @@ class Customer
      * @param string $lastName
      * @param string $email
      */
-    public function __construct(string $id, string $firstName, string $lastName, string $email)
+    public function __construct(string $id, ?string $firstName, ?string $lastName, string $email)
     {
         $this->id = $id;
         $this->firstName = $firstName;
@@ -49,7 +49,7 @@ class Customer
     /**
      * @return string
      */
-    public function getFirstName(): string
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
@@ -57,7 +57,7 @@ class Customer
     /**
      * @return string
      */
-    public function getLastName(): string
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
@@ -70,6 +70,10 @@ class Customer
         return $this->email;
     }
 
+    public function __toString(): string
+    {
+        return $this->getId();
+    }
 
 
 }

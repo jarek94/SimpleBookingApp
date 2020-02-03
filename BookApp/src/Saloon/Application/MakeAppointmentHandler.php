@@ -9,6 +9,7 @@ use App\Saloon\Domain\Customer;
 use App\Saloon\Domain\CustomerRepositoryInterface;
 use App\Saloon\Domain\Exception\WorkplaceNotFoundException;
 use App\Saloon\Domain\WorkplaceRepositoryInterface;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 
@@ -43,23 +44,28 @@ class MakeAppointmentHandler implements MessageHandlerInterface
 
 
         if (!$workplace) {
-            throw  new WorkplaceNotFoundException('test', 404);
+            throw  new WorkplaceNotFoundException();
         }
 
 
-        $customer = $this->customerRepository->get($makeAppointmentCommand->getCustomer());
+        $customer = $this->customerRepository->findOneByEmail($makeAppointmentCommand->getCustomer());
 
-        if (!$customer)
-            $customer = new Customer('id', 'Jarek', 'Walczak', 'jarekw');
+        if (!$customer) {
+            $customer = new Customer(Uuid::uuid4(), null, null, $makeAppointmentCommand->getCustomer());
+            $this->customerRepository->save($customer);
+        }
 
 
         $appointment = new Appointment(
             $makeAppointmentCommand->getId(),
             $workplace,
             $customer,
-            $makeAppointmentCommand->getDateTime(),
+            new \DateTime($makeAppointmentCommand->getDateTime()),
             null
         );
+
+        $this->appointmentRepository->save($appointment);
+
     }
 
 }

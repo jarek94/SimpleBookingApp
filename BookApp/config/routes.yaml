@@ -8,5 +8,5 @@ list_apopintment:
     methods: GET
 list_workplace:
     path: /workplace
-    controller: App\Controller\API\AppointmentController:listWorkplace
+    controller: App\Controller\API\MainController:list
     methods: GET

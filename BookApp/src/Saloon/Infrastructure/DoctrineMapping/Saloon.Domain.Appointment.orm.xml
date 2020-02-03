@@ -4,10 +4,22 @@
             table="appointment"
             repository-class="Saloon\Infrastructure\Peristence\Doctrine\AppointmentRepository">
 
+        <unique-constraints>
+            <unique-constraint columns="customer,date_time" name="date_unique"></unique-constraint>
+            <unique-constraint columns="workplace,date_time" name="workplace_unique"></unique-constraint>
+        </unique-constraints>
         <id name="id" column="id" type="string">
-            <generator strategy="CUSTOM" />
-            <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator" />
+            <generator strategy="CUSTOM"/>
+            <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
         </id>
+
+        <field name="workplace" type="string"/>
+
+        <field name="dateTime" type="datetime"/>
+
+        <field name="customer" type="string"/>
+
+        <field name="hairdresser" type="string" nullable="true"/>
 
     </entity>
 </doctrine-mapping>
