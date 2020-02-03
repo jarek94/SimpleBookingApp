@@ -30,9 +30,9 @@ RUN a2enmod rewrite
 RUN a2enmod headers
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-#COPY ./default-vhost.conf /etc/apache2/sites-available/
+COPY ./default-vhost.conf /etc/apache2/sites-available/
 #VHOST
-#RUN a2ensite default-vhost.conf
+RUN a2ensite default-vhost.conf
 
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php

@@ -1,4 +1,12 @@
 create_apopintment:
     path: /appointments
-    controller: App\Controller\API\Appointment:createApointment
+    controller: App\Controller\API\AppointmentController:createApointment
     methods: POST
+list_apopintment:
+    path: /appointments
+    controller: App\Controller\API\AppointmentController:listApointment
+    methods: GET
+list_workplace:
+    path: /workplace
+    controller: App\Controller\API\AppointmentController:listWorkplace
+    methods: GET

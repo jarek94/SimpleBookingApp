@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+    <entity name="Saloon\Domain\Appointment"
+            table="gn_track"
+            repository-class="Saloon\Infrastructure\Peristence\Doctrine\AppointmentRepository">
+
+        <id name="id" column="id" type="string">
+            <generator strategy="CUSTOM" />
+            <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator" />
+        </id>
+
+    </entity>
+</doctrine-mapping>

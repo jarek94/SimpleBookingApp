@@ -19,9 +19,9 @@ class MakeAppointmentCommand
      */
     private string $workplace;
     /**
-     * @var \DateTime
+     * @var string
      */
-    private \DateTime $dateTime;
+    private string $dateTime;
 
 
     /**
@@ -29,9 +29,9 @@ class MakeAppointmentCommand
      * @param string $id
      * @param string $customer
      * @param string $workplace
-     * @param \DateTime $dateTime
+     * @param string $dateTime
      */
-    public function __construct(string $id, string $customer, string $workplace, \DateTime $dateTime)
+    public function __construct(string $id, string $customer, string $workplace, string $dateTime)
     {
 
         $this->id = $id;
@@ -65,9 +65,9 @@ class MakeAppointmentCommand
     }
 
     /**
-     * @return \DateTime
+     * @return string
      */
-    public function getDateTime(): \DateTime
+    public function getDateTime(): string
     {
         return $this->dateTime;
     }
