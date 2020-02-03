@@ -6,9 +6,9 @@ class Appointment
 {
     private string $id;
 
-    private string $workplace;
+    private Workplace $workplace;
 
-    private string $hairdresser;
+    private ?string $hairdresser;
     /**
      * @var string
      */

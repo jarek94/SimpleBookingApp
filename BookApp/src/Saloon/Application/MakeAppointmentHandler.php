@@ -38,20 +38,19 @@ class MakeAppointmentHandler implements MessageHandlerInterface
     public function __invoke(MakeAppointmentCommand $makeAppointmentCommand)
     {
 
-        try {
 
-            $workplace = $this->workplaceRepository->get($makeAppointmentCommand->getWorkplace());
+        $workplace = $this->workplaceRepository->get($makeAppointmentCommand->getWorkplace());
 
-        } catch (\Exception $exception) {
 
-            throw  new WorkplaceNotFoundException();
+        if (!$workplace) {
+            throw  new WorkplaceNotFoundException('test', 404);
         }
 
 
         $customer = $this->customerRepository->get($makeAppointmentCommand->getCustomer());
 
-        if(!$customer)
-            $customer = new Customer('id','Jarek', 'Walczak','jarekw');
+        if (!$customer)
+            $customer = new Customer('id', 'Jarek', 'Walczak', 'jarekw');
 
 
         $appointment = new Appointment(
