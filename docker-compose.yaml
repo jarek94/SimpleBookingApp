@@ -1,0 +1,37 @@
+version: '2'
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:8.0.13
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: symfony
+      MYSQL_DATABASE: nowa_baza
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    hostname: phpmyadmin.local
+    ports :
+      - "8080:80"
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=symfony
+    links:
+      - mysql:mysql
+  bookapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bookapp
+    environment:
+      TZ: Europe/Warsaw
+    volumes:
+      - ./BookApp:/var/www/html
+    ports :
+      - "8000:80"
+    links:
+      - mysql:mysql
+      - phpmyadmin:phpmyadmin
