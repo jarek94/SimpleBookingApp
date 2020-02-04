@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+    <entity name="App\Order\Domain\Workplace"
+            table="workplace"
+            repository-class="Order\Infrastructure\Peristence\Doctrine\WorkplaceRepository">
+
+        <id name="id" column="id" type="string">
+            <generator strategy="CUSTOM" />
+            <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator" />
+        </id>
+        
+        <one-to-many field="appointments" target-entity="App\Order\Domain\Appointment" mapped-by="workplace"/>
+
+    </entity>
+</doctrine-mapping>

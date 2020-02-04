@@ -1,5 +1,6 @@
 {
     "require": {
-        "symfony/apache-pack": "^1.0"
+        "symfony/apache-pack": "^1.0",
+        "nesbot/carbon": "^2.29"
     }
 }

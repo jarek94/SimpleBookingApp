@@ -4,7 +4,8 @@
 namespace App\Controller\API;
 
 
-use App\Saloon\Application\MakeAppointmentCommand;
+use App\Order\Application\ListingQuery;
+use App\Order\Application\MakeAppointmentCommand;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

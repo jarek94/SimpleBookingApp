@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+    <entity name="App\Order\Domain\Appointment"
+            table="appointment"
+            repository-class="Order\Infrastructure\Peristence\Doctrine\AppointmentRepository">
+
+        <unique-constraints>
+            <unique-constraint columns="customer_id,date_time" name="date_unique"></unique-constraint>
+            <unique-constraint columns="workplace_id,date_time" name="workplace_unique"></unique-constraint>
+        </unique-constraints>
+        <id name="id" column="id" type="string">
+            <generator strategy="CUSTOM"/>
+            <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
+        </id>
+
+        <many-to-one field="workplace" target-entity="App\Order\Domain\Workplace" inversed-by="appointments">
+            <join-column name="workplace_id" referenced-column-name="id" />
+        </many-to-one>
+
+        <many-to-one field="customer" target-entity="App\Order\Domain\Customer" inversed-by="appointments">
+            <join-column name="customer_id" referenced-column-name="id" />
+        </many-to-one>
+
+
+        <field name="dateTime" type="datetime"/>
+
+        <field name="hairdresser" type="string" nullable="true"/>
+
+    </entity>
+</doctrine-mapping>

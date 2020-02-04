@@ -13,6 +13,6 @@ doctrine:
             App:
                 is_bundle: false
                 type: xml
-                dir:  '%kernel.project_dir%/src/Saloon/Infrastructure/DoctrineMapping'
+                dir:  '%kernel.project_dir%/src/Order/Infrastructure/DoctrineMapping'
                 prefix: 'App'
                 alias: App
