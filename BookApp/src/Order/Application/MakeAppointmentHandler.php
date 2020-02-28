@@ -59,7 +59,7 @@ class MakeAppointmentHandler implements MessageHandlerInterface
         }
 
 
-        $date = new \DateTime($makeAppointmentCommand->getDateTime());
+        $date = $makeAppointmentCommand->getDateTime()->getValue();
 
         if($date->format('H'>19 ) || $date->format('H')<8 || !in_array($date->format('i'),['00','30'])){
 
@@ -77,6 +77,7 @@ class MakeAppointmentHandler implements MessageHandlerInterface
         );
 
         try {
+
             $this->appointmentRepository->save($appointment);
         }catch (\Exception $exception){
 

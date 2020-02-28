@@ -4,6 +4,8 @@
 namespace App\Order\Application;
 
 
+use App\Order\Domain\ValueObject\DateTimeVO;
+
 class MakeAppointmentCommand
 {
     /**
@@ -19,9 +21,9 @@ class MakeAppointmentCommand
      */
     private string $workplace;
     /**
-     * @var string
+     * @var DateTimeVO
      */
-    private string $dateTime;
+    private DateTimeVO $dateTime;
 
 
     /**
@@ -29,7 +31,7 @@ class MakeAppointmentCommand
      * @param string $id
      * @param string $customer
      * @param string $workplace
-     * @param string $dateTime
+     * @param DateTimeVO $dateTime
      */
     public function __construct(string $id, string $customer, string $workplace, string $dateTime)
     {
@@ -37,7 +39,7 @@ class MakeAppointmentCommand
         $this->id = $id;
         $this->customer = $customer;
         $this->workplace = $workplace;
-        $this->dateTime = $dateTime;
+        $this->dateTime = new DateTimeVO($dateTime);
     }
 
     /**
@@ -65,9 +67,9 @@ class MakeAppointmentCommand
     }
 
     /**
-     * @return string
+     * @return DateTimeVO
      */
-    public function getDateTime(): string
+    public function getDateTime(): DateTimeVO
     {
         return $this->dateTime;
     }
