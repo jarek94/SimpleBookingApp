@@ -6,9 +6,9 @@ namespace App\Order\Domain\Exception;
 
 use Throwable;
 
-class BadRequest extends \Exception
+class DateTimeInThePast extends \Exception
 {
-    public function __construct($message = "Bad date format. ISO 8601 Allowed", $code = 400, Throwable $previous = null)
+    public function __construct($message = "Selected date has passed", $code = 400, Throwable $previous = null)
     {
 
         parent::__construct($message, $code, $previous);

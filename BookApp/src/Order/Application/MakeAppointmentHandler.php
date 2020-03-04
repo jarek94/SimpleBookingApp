@@ -7,12 +7,9 @@ use App\Order\Domain\Appointment;
 use App\Order\Domain\AppointmentRepositoryInterface;
 use App\Order\Domain\Customer;
 use App\Order\Domain\CustomerRepositoryInterface;
-use App\Order\Domain\Exception\BadRequest;
-use App\Order\Domain\Exception\WorkplacAlreadyBooked;
-use App\Order\Domain\Exception\WorkplaceNotFoundException;
+use App\Order\Domain\Policy\AllPolicy;
 use App\Order\Domain\WorkplaceRepositoryInterface;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 
@@ -42,15 +39,6 @@ class MakeAppointmentHandler implements MessageHandlerInterface
     public function __invoke(MakeAppointmentCommand $makeAppointmentCommand)
     {
 
-
-        $workplace = $this->workplaceRepository->get($makeAppointmentCommand->getWorkplace());
-
-
-        if (!$workplace) {
-            throw  new WorkplaceNotFoundException();
-        }
-
-
         $customer = $this->customerRepository->findOneByEmail($makeAppointmentCommand->getCustomer());
 
         if (!$customer) {
@@ -58,14 +46,16 @@ class MakeAppointmentHandler implements MessageHandlerInterface
             $this->customerRepository->save($customer);
         }
 
+        $makeAppointmentCommand->setCustomer($customer->getId());
+
+
+        (new AllPolicy($this->appointmentRepository, $this->workplaceRepository))->isSatisfied($makeAppointmentCommand);
+
+        $workplace = $this->workplaceRepository->get($makeAppointmentCommand->getWorkplace());
 
         $date = $makeAppointmentCommand->getDateTime()->getValue();
 
-        if($date->format('H'>19 ) || $date->format('H')<8 || !in_array($date->format('i'),['00','30'])){
 
-            throw new BadRequest();
-
-            }
         $date->format('i');
 
         $appointment = new Appointment(
@@ -76,14 +66,7 @@ class MakeAppointmentHandler implements MessageHandlerInterface
             null
         );
 
-        try {
-
-            $this->appointmentRepository->save($appointment);
-        }catch (\Exception $exception){
-
-            throw new WorkplacAlreadyBooked();
-
-        }
+        $this->appointmentRepository->save($appointment);
 
     }
 

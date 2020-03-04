@@ -27,6 +27,8 @@ final class Version20200203234809 extends AbstractMigration
         $this->addSql('ALTER TABLE appointment ADD CONSTRAINT FK_FE38F8449395C3F3 FOREIGN KEY (customer_id) REFERENCES customer (id)');
         $this->addSql('CREATE INDEX IDX_FE38F8449395C3F3 ON appointment (customer_id)');
         $this->addSql('CREATE UNIQUE INDEX date_unique ON appointment (customer_id, date_time)');
+        $this->addSql("INSERT INTO `workplace` (`id`) VALUES ('1')");
+        $this->addSql("INSERT INTO `workplace` (`id`) VALUES ('2')");
     }
 
     public function down(Schema $schema) : void

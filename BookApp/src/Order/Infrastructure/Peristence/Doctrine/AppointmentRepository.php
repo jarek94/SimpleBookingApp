@@ -33,7 +33,6 @@ class AppointmentRepository extends ServiceEntityRepository implements Appointme
             ->from(Appointment::class, 'a')
             ->where('a.dateTime > :date')
             ->setParameter('date', $now);
-//            ->orderBy('a.date_time', 'ASC');
         $query = $qb->getQuery();
         return $query->getResult();
 
@@ -48,5 +47,35 @@ class AppointmentRepository extends ServiceEntityRepository implements Appointme
     public function get(string $id): ?Appointment
     {
         return $this->_em->find(Appointment::class, $id);
+    }
+
+    public function findDuplicate(\DateTime $date, string $workplaceId)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('a')
+            ->from(Appointment::class, 'a')
+            ->where('a.dateTime = :date')
+            ->setParameter('date', $date)
+            ->andWhere('a.workplace = :workplaceId')
+            ->setParameter('workplaceId', $workplaceId)
+            ;
+        $query = $qb->getQuery();
+        return $query->getResult();
+
+    }
+
+    public function findClientDuplicate(\DateTime $date, string $customer)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('a')
+            ->from(Appointment::class, 'a')
+            ->where('a.dateTime = :date')
+            ->setParameter('date', $date)
+            ->andWhere('a.customer = :customer')
+            ->setParameter('customer', $customer)
+        ;
+        $query = $qb->getQuery();
+        return $query->getResult();
+
     }
 }

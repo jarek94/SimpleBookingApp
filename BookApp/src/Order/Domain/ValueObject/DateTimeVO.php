@@ -6,6 +6,13 @@ namespace App\Order\Domain\ValueObject;
 
 use App\Order\Domain\Exception\BadRequest;
 
+/**
+ * Class DateTimeVO
+ * @package App\Order\Domain\ValueObject
+ *
+ * Prosta walidacja formatu daty.
+ * Sprawdzana jest jej zgodność ze standardem ISO 8601
+ */
 class DateTimeVO
 {
     /** @var int */

@@ -74,4 +74,14 @@ class MakeAppointmentCommand
         return $this->dateTime;
     }
 
+    /**
+     * @param string $customer
+     */
+    public function setCustomer(string $customer): void
+    {
+        $this->customer = $customer;
+    }
+
+
+
 }

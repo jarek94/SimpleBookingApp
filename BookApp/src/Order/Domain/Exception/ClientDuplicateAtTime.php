@@ -6,9 +6,9 @@ namespace App\Order\Domain\Exception;
 
 use Throwable;
 
-class BadRequest extends \Exception
+class ClientDuplicateAtTime extends \Exception
 {
-    public function __construct($message = "Bad date format. ISO 8601 Allowed", $code = 400, Throwable $previous = null)
+    public function __construct($message = "Client appointment allready exist at selected time.", $code = 409, Throwable $previous = null)
     {
 
         parent::__construct($message, $code, $previous);

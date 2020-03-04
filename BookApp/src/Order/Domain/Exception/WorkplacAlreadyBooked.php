@@ -4,14 +4,16 @@
 namespace App\Order\Domain\Exception;
 
 
+use Throwable;
+
 class WorkplacAlreadyBooked extends \Exception
 {
-    public function __construct($message = "", $code = 0, Throwable $previous = null)
+    public function __construct($message = "Workplace already booked", $code = 409, Throwable $previous = null)
     {
 
         parent::__construct($message, $code, $previous);
-        $this->message = 'Workplace already booked';
-        $this->code = 409;
+        $this->message = $message;
+        $this->code = $code;
 
     }
 }
